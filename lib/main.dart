@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 const kBg = Color(0xFF0A1810);
 const kBg2 = Color(0xFF0D1F14);
 const kSidebar = Color(0xFF071210);
@@ -25,14 +24,13 @@ const kWTextFaint = Color(0xFF5E5E5E);
 const kGlass = Color(0x08FFFFFF);
 const kGlassBrd = Color(0x12FFFFFF);
 
-
 class Responsive {
-  static bool isMobile(BuildContext ctx) =>
-      MediaQuery.of(ctx).size.width < 600;
+  static bool isMobile(BuildContext ctx) => MediaQuery.of(ctx).size.width < 600;
   static bool isTablet(BuildContext ctx) {
     final w = MediaQuery.of(ctx).size.width;
     return w >= 600 && w < 1024;
   }
+
   static bool isDesktop(BuildContext ctx) =>
       MediaQuery.of(ctx).size.width >= 1024;
 
@@ -68,6 +66,7 @@ class Responsive {
     return 38;
   }
 }
+
 const _navIcons = [
   Icons.home_outlined,
   Icons.person_outline,
@@ -76,7 +75,6 @@ const _navIcons = [
   Icons.mail_outline,
 ];
 const _navLabels = ['Home', 'About', 'Services', 'Projects', 'Contact'];
-
 
 class PortfolioApp extends StatelessWidget {
   const PortfolioApp({super.key});
@@ -90,7 +88,6 @@ class PortfolioApp extends StatelessWidget {
 }
 
 void main() => runApp(const PortfolioApp());
-
 
 class PortfolioHome extends StatefulWidget {
   const PortfolioHome({super.key});
@@ -127,7 +124,8 @@ class _PortfolioHomeState extends State<PortfolioHome> {
     return Scaffold(
       backgroundColor: kBg2,
       // Mobile: bottom nav bar
-      bottomNavigationBar: isMobile ? _MobileNavBar(selected: _activeIdx, onTap: _goTo) : null,
+      bottomNavigationBar:
+          isMobile ? _MobileNavBar(selected: _activeIdx, onTap: _goTo) : null,
       body: Row(children: [
         // Desktop / tablet: sidebar
         if (!isMobile) _Sidebar(selected: _activeIdx, onTap: _goTo),
@@ -149,7 +147,6 @@ class _PortfolioHomeState extends State<PortfolioHome> {
     );
   }
 }
-
 
 class _MobileNavBar extends StatelessWidget {
   final int selected;
@@ -177,7 +174,8 @@ class _MobileNavBar extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(_navIcons[i], color: active ? kGreen : kTextDim, size: 20),
+                  Icon(_navIcons[i],
+                      color: active ? kGreen : kTextDim, size: 20),
                   if (active) ...[
                     const SizedBox(height: 2),
                     Text(
@@ -195,7 +193,6 @@ class _MobileNavBar extends StatelessWidget {
     );
   }
 }
-
 
 class _Sidebar extends StatelessWidget {
   final int selected;
@@ -286,7 +283,6 @@ class _Sidebar extends StatelessWidget {
   }
 }
 
-
 class HeroSection extends StatefulWidget {
   final VoidCallback onHireMeTap;
   const HeroSection({super.key, required this.onHireMeTap});
@@ -329,7 +325,6 @@ class _HeroState extends State<HeroSection>
       child: Container(
         color: kBg,
         child: Stack(children: [
-        
           if (!isMobile)
             Positioned(
               top: 24,
@@ -344,7 +339,6 @@ class _HeroState extends State<HeroSection>
                     height: 2.0),
               ),
             ),
-          
           if (!isMobile && !isTablet)
             Positioned(
               right: 60,
@@ -355,15 +349,12 @@ class _HeroState extends State<HeroSection>
                     size: const Size(200, 200), painter: _FlutterPainter()),
               ),
             ),
-          
           SafeArea(
             child: Center(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: hPad),
                 child: Align(
-                  alignment: isMobile
-                      ? Alignment.center
-                      : Alignment.centerLeft,
+                  alignment: isMobile ? Alignment.center : Alignment.centerLeft,
                   child: FadeTransition(
                     opacity: _fade,
                     child: SlideTransition(
@@ -389,7 +380,6 @@ class _HeroState extends State<HeroSection>
               ),
             ),
           ),
-          
           if (!isMobile)
             const Positioned(
               bottom: 32,
@@ -401,7 +391,6 @@ class _HeroState extends State<HeroSection>
                       fontFamily: 'monospace',
                       height: 1.8)),
             ),
-          
           Positioned(
             bottom: isMobile ? 16 : 32,
             right: isMobile ? 0 : 80,
@@ -443,24 +432,23 @@ class _HeroState extends State<HeroSection>
     final nameSize = bigSize + 4;
 
     return Column(
-        crossAxisAlignment: isMobile
-            ? CrossAxisAlignment.center
-            : CrossAxisAlignment.start,
+        crossAxisAlignment:
+            isMobile ? CrossAxisAlignment.center : CrossAxisAlignment.start,
         children: [
           RichText(
               textAlign: isMobile ? TextAlign.center : TextAlign.left,
               text: TextSpan(
                   style: TextStyle(fontSize: smallerSize),
                   children: const [
-                TextSpan(
-                    text: "('",
-                    style: TextStyle(
-                        color: kTextDim, fontWeight: FontWeight.w300)),
-                TextSpan(
-                    text: "Hi, I am",
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.w300)),
-              ])),
+                    TextSpan(
+                        text: "('",
+                        style: TextStyle(
+                            color: kTextDim, fontWeight: FontWeight.w300)),
+                    TextSpan(
+                        text: "Hi, I am",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.w300)),
+                  ])),
           const SizedBox(height: 6),
           RichText(
               text: TextSpan(
@@ -482,20 +470,20 @@ class _HeroState extends State<HeroSection>
               text: TextSpan(
                   style: TextStyle(fontSize: smallerSize),
                   children: const [
-                TextSpan(
-                    text: "Flutter Developer",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      decoration: TextDecoration.underline,
-                      decorationColor: kGreen,
-                      decorationThickness: 3,
-                    )),
-                TextSpan(
-                    text: "'),",
-                    style: TextStyle(
-                        color: kTextDim, fontWeight: FontWeight.w300)),
-              ])),
+                    TextSpan(
+                        text: "Flutter Developer",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline,
+                          decorationColor: kGreen,
+                          decorationThickness: 3,
+                        )),
+                    TextSpan(
+                        text: "'),",
+                        style: TextStyle(
+                            color: kTextDim, fontWeight: FontWeight.w300)),
+                  ])),
         ]);
   }
 
@@ -517,10 +505,9 @@ class _HeroState extends State<HeroSection>
           foregroundColor: kBg,
           padding: EdgeInsets.symmetric(
               horizontal: isMobile ? 28 : 40, vertical: 16),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          textStyle:
-              TextStyle(fontSize: isMobile ? 14 : 16, fontWeight: FontWeight.bold),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          textStyle: TextStyle(
+              fontSize: isMobile ? 14 : 16, fontWeight: FontWeight.bold),
           elevation: 8,
           shadowColor: kGreen.withOpacity(0.4),
         ),
@@ -534,10 +521,9 @@ class _HeroState extends State<HeroSection>
           side: const BorderSide(color: kGreen, width: 1.5),
           padding: EdgeInsets.symmetric(
               horizontal: isMobile ? 20 : 32, vertical: 16),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          textStyle:
-              TextStyle(fontSize: isMobile ? 13 : 15, fontWeight: FontWeight.w600),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          textStyle: TextStyle(
+              fontSize: isMobile ? 13 : 15, fontWeight: FontWeight.w600),
         ),
         onPressed: _downloadCV,
         icon: const Icon(Icons.download_outlined, size: 18),
@@ -557,7 +543,7 @@ class _HeroState extends State<HeroSection>
   }
 
   Future<void> _downloadCV() async {
-    const cvUrl = 'https://drive.google.com/your-cv-link-here';
+    const cvUrl = 'https://canva.link/qmkuskxcpcrc0gh';
     final uri = Uri.parse(cvUrl);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
@@ -605,7 +591,6 @@ class _ScrollHintState extends State<_ScrollHint>
       );
 }
 
-
 class _FlutterPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size s) {
@@ -643,7 +628,6 @@ class _FlutterPainter extends CustomPainter {
   @override
   bool shouldRepaint(_) => false;
 }
-
 
 class WhoAmISection extends StatefulWidget {
   final ValueChanged<int> onScrollTo;
@@ -833,8 +817,7 @@ class _WhoLeftColumn extends StatelessWidget {
               const TextSpan(text: ', and '),
               const TextSpan(
                 text: 'State Management',
-                style:
-                    TextStyle(color: kWTextMid, fontWeight: FontWeight.w400),
+                style: TextStyle(color: kWTextMid, fontWeight: FontWeight.w400),
               ),
               const TextSpan(text: '.'),
             ],
@@ -1166,7 +1149,6 @@ class _WhoMiniChip extends StatelessWidget {
       );
 }
 
-
 class ServicesSection extends StatefulWidget {
   const ServicesSection({super.key});
   @override
@@ -1247,9 +1229,9 @@ class _ServicesSectionState extends State<ServicesSection>
     if (isMobile) {
       cardWidth = size.width - hPad * 2;
     } else if (isTablet) {
-      cardWidth = (size.width - hPad * 2 - 72 - 18) / 2; 
+      cardWidth = (size.width - hPad * 2 - 72 - 18) / 2;
     } else {
-      cardWidth = (size.width - hPad * 2 - 72 - 36) / 3; 
+      cardWidth = (size.width - hPad * 2 - 72 - 36) / 3;
     }
 
     return SizedBox(
@@ -1261,7 +1243,8 @@ class _ServicesSectionState extends State<ServicesSection>
           child: SlideTransition(
             position: _slide,
             child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: hPad, vertical: Responsive.vPad(context)),
+              padding: EdgeInsets.symmetric(
+                  horizontal: hPad, vertical: Responsive.vPad(context)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -1273,9 +1256,7 @@ class _ServicesSectionState extends State<ServicesSection>
                   const Text(
                     'Root-Sys International · Flutter Development · 6-Month Training & Internship',
                     style: TextStyle(
-                        color: kTextDim,
-                        fontSize: 12,
-                        fontFamily: 'monospace'),
+                        color: kTextDim, fontSize: 12, fontFamily: 'monospace'),
                   ),
                   const SizedBox(height: 32),
                   const _PremiumSubHeader(label: '01', title: 'What I Do'),
@@ -1283,11 +1264,13 @@ class _ServicesSectionState extends State<ServicesSection>
                   Wrap(
                     spacing: 18,
                     runSpacing: 18,
-                    children: _services.map((s) => SizedBox(
-                      width: cardWidth.clamp(240.0, 400.0),
-                      child: _ServiceCard(
-                          icon: s.icon, title: s.title, desc: s.desc),
-                    )).toList(),
+                    children: _services
+                        .map((s) => SizedBox(
+                              width: cardWidth.clamp(240.0, 400.0),
+                              child: _ServiceCard(
+                                  icon: s.icon, title: s.title, desc: s.desc),
+                            ))
+                        .toList(),
                   ),
                   const SizedBox(height: 40),
                 ],
@@ -1299,7 +1282,6 @@ class _ServicesSectionState extends State<ServicesSection>
     );
   }
 }
-
 
 class ProjectsSection extends StatefulWidget {
   const ProjectsSection({super.key});
@@ -1388,7 +1370,7 @@ class _ProjectsSectionState extends State<ProjectsSection>
     final isTablet = Responsive.isTablet(context);
     final hPad = Responsive.hPad(context);
 
-    // Calculate card widths responsively
+    
     double cardWidth;
     if (isMobile) {
       cardWidth = size.width - hPad * 2;
@@ -1402,7 +1384,7 @@ class _ProjectsSectionState extends State<ProjectsSection>
     return SizedBox(
       height: size.height,
       child: Container(
-        color:kBg2,
+        color: kBg2,
         child: FadeTransition(
           opacity: _fade,
           child: SlideTransition(
@@ -1419,16 +1401,16 @@ class _ProjectsSectionState extends State<ProjectsSection>
                       fontSize: Responsive.sectionTitleSize(context)),
                   const SizedBox(height: 28),
                   Wrap(
-  spacing: 20,
-  runSpacing: 20,
-  children: _projects.map((p) {
-    return SizedBox(
-      width: 350,
-      height: 250,
-      child: _ProjectCard(p),
-    );
-  }).toList(),
-),
+                    spacing: 20,
+                    runSpacing: 20,
+                    children: _projects.map((p) {
+                      return SizedBox(
+                        width: 350,
+                        height: 250,
+                        child: _ProjectCard(p),
+                      );
+                    }).toList(),
+                  ),
                   const SizedBox(height: 40),
                 ],
               ),
@@ -1578,8 +1560,8 @@ class _ProjectCardState extends State<_ProjectCard> {
             const SizedBox(height: 8),
             Text(
               widget.data['desc'] as String,
-              style: const TextStyle(
-                  color: kTextDim, fontSize: 12.5, height: 1.7),
+              style:
+                  const TextStyle(color: kTextDim, fontSize: 12.5, height: 1.7),
             ),
             const SizedBox(height: 14),
             Wrap(
@@ -1591,8 +1573,7 @@ class _ProjectCardState extends State<_ProjectCard> {
                             horizontal: 10, vertical: 3),
                         decoration: BoxDecoration(
                           color: kGreenGlow,
-                          border:
-                              Border.all(color: kGreenDim.withOpacity(0.4)),
+                          border: Border.all(color: kGreenDim.withOpacity(0.4)),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(t,
@@ -1673,7 +1654,6 @@ class _GitHubLogoPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant _GitHubLogoPainter old) => old.color != color;
 }
-
 
 class ContactSection extends StatefulWidget {
   const ContactSection({super.key});
@@ -1796,12 +1776,11 @@ class _ContactSectionState extends State<ContactSection>
     final isTablet = Responsive.isTablet(context);
     final hPad = Responsive.hPad(context);
 
-    
     double cardWidth;
     if (isMobile) {
       cardWidth = size.width - hPad * 2;
     } else if (isTablet) {
-      cardWidth = (size.width - hPad * 2 - 100- 20) / 2;
+      cardWidth = (size.width - hPad * 2 - 100 - 20) / 2;
     } else {
       cardWidth = (size.width - hPad * 2 - 100 - 60) / 4;
     }
@@ -1826,81 +1805,73 @@ class _ContactSectionState extends State<ContactSection>
                   _SectionTitle('Get In Touch',
                       fontSize: Responsive.sectionTitleSize(context)),
                   const SizedBox(height: 32),
-                  
-                     const Text(
-                      "I'm open to freelance projects, full-time roles,\nor just a Flutter conversation. Drop me a message!",
-                      style: TextStyle(
-                          color: kTextDim, fontSize: 14, height: 1.8),
-                    ),
-                  
+                  const Text(
+                    "I'm open to freelance projects, full-time roles,\nor just a Flutter conversation. Drop me a message!",
+                    style:
+                        TextStyle(color: kTextDim, fontSize: 14, height: 1.8),
+                  ),
                   const SizedBox(height: 100),
                   Wrap(
                     spacing: 16,
                     runSpacing: 16,
                     children: [
-                       SizedBox(
-                          width: cardWidth,
-                          child: _ContactCard(
-                            icon: Icons.email_outlined,
-                            title: 'Email',
-                            value: _email,
-                            subtitle: 'Tap to send email',
-                            onTap: () => _launch('mailto:$_email'),
-                          ),
-                        ),
-                     
                       SizedBox(
-                          width: cardWidth,
-                          child: _ContactCard(
-                            icon: Icons.code,
-                            title: 'GitHub',
-                            value: 'github.com/muhsina9947',
-                            subtitle: 'View my repositories',
-                            onTap: () => _launch(_github),
-                          ),
+                        width: cardWidth,
+                        child: _ContactCard(
+                          icon: Icons.email_outlined,
+                          title: 'Email',
+                          value: _email,
+                          subtitle: 'Tap to send email',
+                          onTap: () => _launch('mailto:$_email'),
                         ),
-                      
-                    
-                         SizedBox(
-                          width: cardWidth,
-                          child: _ContactCard(
-                            icon: Icons.link,
-                            title: 'LinkedIn',
-                            value: 'linkedin.com/in/muhsina',
-                            subtitle: 'Connect with me',
-                            onTap: () => _launch(_linkedin),
-                          ),
+                      ),
+                      SizedBox(
+                        width: cardWidth,
+                        child: _ContactCard(
+                          icon: Icons.code,
+                          title: 'GitHub',
+                          value: 'github.com/muhsina9947',
+                          subtitle: 'View my repositories',
+                          onTap: () => _launch(_github),
                         ),
-                      
-                       SizedBox(
-                          width: cardWidth,
-                          child: _ContactCard(
-                            icon: Icons.phone_outlined,
-                            title: 'Phone',
-                            value: _phone,
-                            subtitle: 'Tap to call',
-                            onTap: () => _launch('tel:$_phone'),
-                          ),
+                      ),
+                      SizedBox(
+                        width: cardWidth,
+                        child: _ContactCard(
+                          icon: Icons.link,
+                          title: 'LinkedIn',
+                          value: 'linkedin.com/in/muhsina',
+                          subtitle: 'Connect with me',
+                          onTap: () => _launch(_linkedin),
                         ),
-                     
+                      ),
+                      SizedBox(
+                        width: cardWidth,
+                        child: _ContactCard(
+                          icon: Icons.phone_outlined,
+                          title: 'WhatsApp',
+value: '+91 7012083937',
+subtitle: 'Chat with me',
+onTap: () => _launch(
+  'https://wa.me/917012083937',
+),
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 100),
-
-Align(
-  alignment: Alignment.center,
-  child: Text(
-    '© 2026 Muhsina · Built with Flutter 💚',
-    textAlign: TextAlign.center,
-    style: TextStyle(
-      color: kTextDim.withOpacity(0.5),
-      fontSize: 12,
-      fontFamily: 'monospace',
-    ),
-  ),
-),
-
-
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      '© 2026 Muhsina · Built with Flutter 💚',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: kTextDim.withOpacity(0.5),
+                        fontSize: 12,
+                        fontFamily: 'monospace',
+                      ),
+                    ),
+                  ),
                   const SizedBox(height: 16),
                 ],
               ),
@@ -1918,7 +1889,6 @@ Align(
     }
   }
 }
-
 
 class _PremiumSubHeader extends StatelessWidget {
   final String label, title;
