@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-// ── Color Palette ─────────────────────────────────────────────────────────────
+
 const kBg = Color(0xFF0A1810);
 const kBg2 = Color(0xFF0D1F14);
 const kSidebar = Color(0xFF071210);
@@ -25,7 +25,7 @@ const kWTextFaint = Color(0xFF5E5E5E);
 const kGlass = Color(0x08FFFFFF);
 const kGlassBrd = Color(0x12FFFFFF);
 
-// ── Responsive Breakpoints ────────────────────────────────────────────────────
+
 class Responsive {
   static bool isMobile(BuildContext ctx) =>
       MediaQuery.of(ctx).size.width < 600;
@@ -68,8 +68,6 @@ class Responsive {
     return 38;
   }
 }
-
-// ── Nav constants ─────────────────────────────────────────────────────────────
 const _navIcons = [
   Icons.home_outlined,
   Icons.person_outline,
@@ -79,7 +77,7 @@ const _navIcons = [
 ];
 const _navLabels = ['Home', 'About', 'Services', 'Projects', 'Contact'];
 
-// ── App ───────────────────────────────────────────────────────────────────────
+
 class PortfolioApp extends StatelessWidget {
   const PortfolioApp({super.key});
   @override
@@ -93,7 +91,7 @@ class PortfolioApp extends StatelessWidget {
 
 void main() => runApp(const PortfolioApp());
 
-// ── Home shell ────────────────────────────────────────────────────────────────
+
 class PortfolioHome extends StatefulWidget {
   const PortfolioHome({super.key});
   @override
@@ -127,7 +125,7 @@ class _PortfolioHomeState extends State<PortfolioHome> {
     final isMobile = Responsive.isMobile(context);
 
     return Scaffold(
-      backgroundColor: kBg,
+      backgroundColor: kBg2,
       // Mobile: bottom nav bar
       bottomNavigationBar: isMobile ? _MobileNavBar(selected: _activeIdx, onTap: _goTo) : null,
       body: Row(children: [
@@ -152,7 +150,7 @@ class _PortfolioHomeState extends State<PortfolioHome> {
   }
 }
 
-// ── Mobile Bottom Nav ─────────────────────────────────────────────────────────
+
 class _MobileNavBar extends StatelessWidget {
   final int selected;
   final ValueChanged<int> onTap;
@@ -198,7 +196,7 @@ class _MobileNavBar extends StatelessWidget {
   }
 }
 
-// ── Desktop Sidebar ───────────────────────────────────────────────────────────
+
 class _Sidebar extends StatelessWidget {
   final int selected;
   final ValueChanged<int> onTap;
@@ -288,7 +286,7 @@ class _Sidebar extends StatelessWidget {
   }
 }
 
-// ── Hero Section ──────────────────────────────────────────────────────────────
+
 class HeroSection extends StatefulWidget {
   final VoidCallback onHireMeTap;
   const HeroSection({super.key, required this.onHireMeTap});
@@ -331,7 +329,7 @@ class _HeroState extends State<HeroSection>
       child: Container(
         color: kBg,
         child: Stack(children: [
-          // Background code decoration — hidden on very small screens
+        
           if (!isMobile)
             Positioned(
               top: 24,
@@ -346,7 +344,7 @@ class _HeroState extends State<HeroSection>
                     height: 2.0),
               ),
             ),
-          // Flutter logo — only on desktop
+          
           if (!isMobile && !isTablet)
             Positioned(
               right: 60,
@@ -357,7 +355,7 @@ class _HeroState extends State<HeroSection>
                     size: const Size(200, 200), painter: _FlutterPainter()),
               ),
             ),
-          // Main content
+          
           SafeArea(
             child: Center(
               child: Padding(
@@ -391,7 +389,7 @@ class _HeroState extends State<HeroSection>
               ),
             ),
           ),
-          // Bottom code closing — desktop only
+          
           if (!isMobile)
             const Positioned(
               bottom: 32,
@@ -403,7 +401,7 @@ class _HeroState extends State<HeroSection>
                       fontFamily: 'monospace',
                       height: 1.8)),
             ),
-          // Scroll hint
+          
           Positioned(
             bottom: isMobile ? 16 : 32,
             right: isMobile ? 0 : 80,
@@ -453,12 +451,12 @@ class _HeroState extends State<HeroSection>
               textAlign: isMobile ? TextAlign.center : TextAlign.left,
               text: TextSpan(
                   style: TextStyle(fontSize: smallerSize),
-                  children: [
+                  children: const [
                 TextSpan(
                     text: "('",
                     style: TextStyle(
                         color: kTextDim, fontWeight: FontWeight.w300)),
-                const TextSpan(
+                TextSpan(
                     text: "Hi, I am",
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.w300)),
@@ -468,8 +466,8 @@ class _HeroState extends State<HeroSection>
               text: TextSpan(
                   style: TextStyle(
                       fontSize: nameSize, fontWeight: FontWeight.w900),
-                  children: [
-                const TextSpan(
+                  children: const [
+                TextSpan(
                     text: "Muhsina",
                     style: TextStyle(
                       color: kGreen,
@@ -483,8 +481,8 @@ class _HeroState extends State<HeroSection>
               textAlign: isMobile ? TextAlign.center : TextAlign.left,
               text: TextSpan(
                   style: TextStyle(fontSize: smallerSize),
-                  children: [
-                const TextSpan(
+                  children: const [
+                TextSpan(
                     text: "Flutter Developer",
                     style: TextStyle(
                       color: Colors.white,
@@ -1168,7 +1166,7 @@ class _WhoMiniChip extends StatelessWidget {
       );
 }
 
-// ── Services Section ──────────────────────────────────────────────────────────
+
 class ServicesSection extends StatefulWidget {
   const ServicesSection({super.key});
   @override
@@ -1249,9 +1247,9 @@ class _ServicesSectionState extends State<ServicesSection>
     if (isMobile) {
       cardWidth = size.width - hPad * 2;
     } else if (isTablet) {
-      cardWidth = (size.width - hPad * 2 - 72 - 18) / 2; // 2 cols on tablet, minus sidebar
+      cardWidth = (size.width - hPad * 2 - 72 - 18) / 2; 
     } else {
-      cardWidth = (size.width - hPad * 2 - 72 - 36) / 3; // 3 cols on desktop
+      cardWidth = (size.width - hPad * 2 - 72 - 36) / 3; 
     }
 
     return SizedBox(
@@ -1280,7 +1278,7 @@ class _ServicesSectionState extends State<ServicesSection>
                         fontFamily: 'monospace'),
                   ),
                   const SizedBox(height: 32),
-                  _PremiumSubHeader(label: '01', title: 'What I Do'),
+                  const _PremiumSubHeader(label: '01', title: 'What I Do'),
                   const SizedBox(height: 22),
                   Wrap(
                     spacing: 18,
@@ -1302,7 +1300,7 @@ class _ServicesSectionState extends State<ServicesSection>
   }
 }
 
-// ── Projects Section ──────────────────────────────────────────────────────────
+
 class ProjectsSection extends StatefulWidget {
   const ProjectsSection({super.key});
   @override
@@ -1404,7 +1402,7 @@ class _ProjectsSectionState extends State<ProjectsSection>
     return SizedBox(
       height: size.height,
       child: Container(
-        color: kBg,
+        color:kBg2,
         child: FadeTransition(
           opacity: _fade,
           child: SlideTransition(
@@ -1921,7 +1919,7 @@ Align(
   }
 }
 
-// ── Shared widgets ────────────────────────────────────────────────────────────
+
 class _PremiumSubHeader extends StatelessWidget {
   final String label, title;
   const _PremiumSubHeader({required this.label, required this.title});
